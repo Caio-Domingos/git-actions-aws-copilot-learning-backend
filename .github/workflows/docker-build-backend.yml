@@ -21,7 +21,7 @@ jobs:
           # aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1 # Altere conforme necessário
           role-to-assume: arn:aws:iam::319218652802:role/github-actions-version1
-          role-duration-seconds: 1200 # Duração do token de sessão (20 minutos)
+          role-duration-seconds: 1200
 
       - name: Test AWS CLI Connection
         run: |
