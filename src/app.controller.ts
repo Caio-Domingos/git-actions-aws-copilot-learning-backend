@@ -1,14 +1,25 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ConfigService } from '@nestjs/config';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private configService: ConfigService,
+  ) {}
 
   @Get('/health')
   getHello() {
     return {
       status: 'ok',
+    };
+  }
+  @Get('/config')
+  getConfig() {
+    return {
+      status: 'ok',
+      api: this.configService.get<string>('ENV_NODE'),
     };
   }
   @Get('/items')
@@ -31,7 +42,7 @@ export class AppController {
         name: 'Item 3',
         description: 'This is item 3',
         price: 300,
-      }
-    ]
+      },
+    ];
   }
 }

@@ -1,0 +1,28 @@
+name: backend
+type: Load Balanced Web Service
+
+http:
+  alias: api.ga-awscop.thinkless.com.br
+  path: '/'
+  healthcheck: '/health'
+
+image:
+  build: Dockerfile
+
+  port: 3000
+
+cpu: 256
+memory: 512
+count: 1
+exec: true
+network:
+  connect: true
+
+secrets:
+  ENV_NODE:
+    secretsmanager: '${COPILOT_APPLICATION_NAME}/${COPILOT_ENVIRONMENT_NAME}/test:ENV_NODE::'
+
+environments:
+  develop:
+    http:
+      alias: develop-api.ga-awscop.thinkless.com.br
