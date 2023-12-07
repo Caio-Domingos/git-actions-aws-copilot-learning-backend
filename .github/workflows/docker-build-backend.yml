@@ -1,4 +1,4 @@
-name: Build and Push Docker Image
+name: Update Application - Backend
 
 on:
   push:
@@ -11,10 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Abrindo repositório...
         uses: actions/checkout@v2
 
-      - name: Configure AWS Credentials
+      - name: Configurando credenciais da AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -23,7 +23,8 @@ jobs:
           role-to-assume: arn:aws:iam::319218652802:role/github-actions-version1
           role-duration-seconds: 1200
 
-      - uses: ksivamuthu/aws-copilot-github-action@v0.0.1
+      - name: Instalando Copilot e testando
+        uses: ksivamuthu/aws-copilot-github-action@v0.0.1
         with:
           command: install
       - run: |
@@ -32,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Configure AWS Credentials
+      - name: Configurando credenciais da AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
           # aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -41,6 +42,7 @@ jobs:
           role-to-assume: arn:aws:iam::319218652802:role/github-actions-version1
           role-duration-seconds: 1200
       - uses: ksivamuthu/aws-copilot-github-action@v0.0.6
+        name: Lancando nova versão
         with:
           command: deploy
           app: ga-awscop
