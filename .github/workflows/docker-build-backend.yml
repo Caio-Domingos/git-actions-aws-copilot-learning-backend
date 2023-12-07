@@ -45,4 +45,3 @@ jobs:
           command: deploy
           app: ga-awscop
           env: develop
-          name: backend
